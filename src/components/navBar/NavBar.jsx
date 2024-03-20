@@ -4,12 +4,13 @@ import {useState} from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaTimes } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
-
+import logo from "../../assets/img/logo.png";
+import {NavLink } from "react-router-dom";
 export const NavBar = () => {
 	const [click, setClick] = useState(false);
 	const darClick = () => setClick(!click);
 	const contenido = <>
-	<div className="lg:hidden block absolute top-[14%] w-full left-0 right-0 bg-slate-400 transition">
+	<div className="lg:hidden block relative top-[14%] w-full left-0 right-0 bg-slate-400 transition">
 		<ul className="text-center text-xl p-10">
 		<Link spy={true} smooth={true} to="/">
 			<li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">Inicio</li>
@@ -35,8 +36,8 @@ export const NavBar = () => {
   return (
 	<nav>
 		<div className="flex items-center justify-between gap-2">
-				<div className="ml-10 mt-5">
-					<img src="./img/logo.png" alt="logo" />
+				<div className="ml-10 mt-5 w-20">
+				<NavLink to={"/"}><img src={logo} alt="logo" /></NavLink>
 				</div>
 				<div className="mt-5">
 				<Buscador></Buscador>
@@ -44,13 +45,15 @@ export const NavBar = () => {
 				<div className="flex items-center justify-start mr-10">
 				<ul className="flex gap-5 mr-10 text-[14px] text-white">
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Ingresar</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/login"}>Ingresar</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Registrarce</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/registrar"}>Registrarce</NavLink></li>
 					</Link>
-					<Link><li className="p-5 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
-						<FaCartShopping></FaCartShopping>
+					<Link spy={true} smooth={true} to="/"><li className="p-5 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+					<NavLink to={"/carro"}><FaCartShopping></FaCartShopping></NavLink>
 						</li></Link>
 					</ul>
 				</div>
@@ -61,22 +64,29 @@ export const NavBar = () => {
 				<div className= "flex-10">
 					<ul className="flex gap-5 mr-10 text-[14px]">
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Inicio</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/"}>Inicio</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Comprar Todo</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+							<NavLink to={"/products"}>Comprar Todo</NavLink>
+							</li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Acerca de</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/products"}>Acerca de</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Blog</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/products"}>Blog</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Contacto</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/products"}>Contacto</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
-						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">Miembros</li>
+						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
+						<NavLink to={"/products"}>Miembros</NavLink></li>
 					</Link>
 					</ul>
 				</div>
