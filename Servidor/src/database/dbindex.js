@@ -2,6 +2,12 @@ require('dotenv').config();
 const { Pool } = require('pg');
 const { HOST, USER, PASSWORD, DBNAME } = process.env;
 
+
+
+
+// INSERT INTO productos VALUES ('Agenda', 'Agenda personalizada azul', 2000, 2, , , , ,)
+
+
 const db = new Pool({
 	host: HOST,
 	user: USER,

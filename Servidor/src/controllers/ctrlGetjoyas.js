@@ -15,18 +15,10 @@ const getTodoJoyas = async (req, res) => {
 	}
     // Validar order_by
     const orderbyPermitido = [
-        'stock_ASC',
-        'stock_DESC',
-        'precio_ASC',
-        'precio_DESC',
-        'metal_ASC',
-        'metal_DESC',
-        'categoria_ASC',
-        'categoria_DESC',
-        'nombre_ASC',
-        'nombre_DESC',
-        'id_ASC',
-        'id_DESC'
+        'prod_stock-ASC',
+        'prod_stock-DESC',
+        'prod_precio-ASC',
+        'prod_precio-DESC',
     ];
 
     if (!orderbyPermitido.includes(order_by)) {
@@ -40,7 +32,7 @@ const getTodoJoyas = async (req, res) => {
         });
     }
 
-    const [campo, direccion] = order_by.split("_");
+    const [campo, direccion] = order_by.split("-");
     const offset = (page - 1) * limits;
     const formattedQuery = format(selectJoyas, campo, direccion, limits, offset);
 
