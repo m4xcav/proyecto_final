@@ -36,7 +36,7 @@ const Carro = () => {
                                 </td>
                                 <td class="py-4">$19.99</td>
                             </tr>
-                            <!-- More product rows -->
+                            
                         </tbody>
                     </table>
                 </div>

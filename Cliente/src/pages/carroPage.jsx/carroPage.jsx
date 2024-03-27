@@ -1,4 +1,4 @@
-import {Carro} from '../../components/carro/Carro'
+import Carro from "../../components/carro/Carro"
 
 const carroPage = () => {
   return (
