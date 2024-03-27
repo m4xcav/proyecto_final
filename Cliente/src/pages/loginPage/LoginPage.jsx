@@ -1,38 +1,74 @@
+import axios from 'axios'
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ENDPOINT } from '../../config/constants'
+// import Context from '../contexts/Context'
+
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+const initialForm = { email: 'correo@correo.com', password: '123456789' }
 
 const LoginPage = () => {
+  const navigate = useNavigate()
+  const [user, setUser] = useState(initialForm)
+  // const { setDeveloper } = useContext(Context)
+
+  const handleUser = (event) => setUser({ ...user, [event.target.name]: event.target.value })
+
+  const handleForm = (event) => {
+    event.preventDefault()
+
+    if (!user.email.trim() || !user.password.trim()) {
+      return window.alert('Email y password obligatorias.')
+    }
+
+    if (!emailRegex.test(user.email)) {
+      return window.alert('El formato del email no es correcto!')
+    }
+
+    axios.post(ENDPOINT.login, user)
+      .then(({ data }) => {
+        window.sessionStorage.setItem('token', data.token)
+        window.alert('Usuario identificado con éxito 😀.')
+        // setDeveloper({})
+        console.log(data)
+        navigate('/perfil')
+      })
+      .catch(({ response: { data } }) => {
+        console.error(data)
+        window.alert(`${data.message} 🙁.`)
+      })
+      
+  }
+
   return (
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Ingresa en tu cuenta</h2>
+    <form onSubmit={handleForm} className='mx-auto mt-10 pb-28 w-10/12 sm:w-6/12 md:w-3/12'>
+  <h1 className='text-center text-2xl font-bold'>Iniciar Sesión</h1>
+  <hr className='my-4' />
+  <div className='mb-4'>
+    <label className='block'>Email address</label>
+    <input
+      value={user.email}
+      onChange={handleUser}
+      type='email'
+      name='email'
+      className='w-full p-2 border border-gray-300 rounded'
+      placeholder='Enter email'
+    />
   </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST">
-      <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Correo Electronico</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña</label>
-          <div class="text-sm">
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Olvidaste tu contraseña?</a>
-          </div>
-        </div>
-        <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-        </div>
-      </div>
-
-      <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Registrate</button>
-      </div>
-    </form>
+  <div className='mb-4'>
+    <label className='block'>Password</label>
+    <input
+      value={user.password}
+      onChange={handleUser}
+      type='password'
+      name='password'
+      className='w-full p-2 border border-gray-300 rounded'
+      placeholder='Password'
+    />
   </div>
-</div>
+  <button type='submit' className='w-full p-2 bg-indigo-600 text-white  rounded mt-4'>Iniciar Sesión</button>
+</form>
+
   )
 }
 
