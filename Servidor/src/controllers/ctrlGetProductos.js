@@ -1,9 +1,14 @@
-import React from 'react'
+const db = require('../database/dbindex');
+const format = require('pg-format');
 
-const ctrlGetProductos = () => {
-  return (
-    <div>ctrlGetProductos</div>
-  )
-}
+const ctrlGetProductos = async (req, res) =>  {
+ 
+  const { order_by, categoria } = req.query;
+  if(categoria){
+      
+  }
+};
 
-export default ctrlGetProductos
+module.exports = {
+  ctrlGetProductos,
+} 
