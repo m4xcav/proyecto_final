@@ -4,7 +4,7 @@ import ProductPage from "../pages/productPage/ProductPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
 import Register from "../pages/Register/Register";
-import carroPage from "../pages/carroPage.jsx/carroPage";
+import CarPage from "../pages/carroPage.jsx/CarPage";
 const RoutesPoyect = () => {
     
 	return (
@@ -13,7 +13,7 @@ const RoutesPoyect = () => {
 			<Route path="/products" element={<ProductPage />}></Route>
 			<Route path="/login" element={<LoginPage />}></Route>
 			<Route path="/registrar" element={<Register />}></Route>
-			<Route path="/carro" element={<carroPage />}></Route>
+			<Route path="/carro" element={<CarPage/>}></Route>
 			<Route path="/*" element={<NotFoundPage/>}></Route>
 		</Routes>
 	);
