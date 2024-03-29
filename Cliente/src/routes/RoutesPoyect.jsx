@@ -5,6 +5,7 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
 import Register from "../pages/Register/Register";
 import CarroPage from "../pages/carroPage/CarroPage";
+
 const RoutesPoyect = () => {
     
 	return (
