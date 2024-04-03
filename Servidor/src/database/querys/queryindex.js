@@ -1,4 +1,4 @@
-const prodid = `SELECT * FROM inventario WHERE id = $1`;
+const prodid = `SELECT * FROM productos WHERE prod_id = $1`;
 //aqui crear la querry con filtros llamas la const selectFiltros
 const selectprod = `SELECT p.prod_id, p.prod_nombre, p.prod_descripcion, p.prod_precio, p.prod_stock, p.prod_img, c.categoria_name
 FROM public.productos p

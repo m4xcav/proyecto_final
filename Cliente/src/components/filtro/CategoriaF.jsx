@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const Filtro = () => {
+const CategoriaF = () => {
   const [countries, setCountries] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [selected, setSelected] = useState("");
@@ -16,7 +16,7 @@ const Filtro = () => {
       });
   }, []);
   return (
-    <div className="w-72 font-medium h-10">
+    <div className="w-72 font-medium h-80">
       <div
         onClick={() => setOpen(!open)}
         className={`bg-white w-full p-2 flex items-center justify-between rounded ${
@@ -74,4 +74,4 @@ const Filtro = () => {
   );
 };
 
-export default Filtro;
+export default CategoriaF;
