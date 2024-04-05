@@ -6,27 +6,37 @@ import Filtro from "../../components/filtro/Filtro";
 const ProductPage = () => {
     const urlBaseServer = "http://localhost:3000";
     const [productos, setProductos] = useState([]);
+    const [filtro, setFiltro] = useState("");
+    const [categoria, setCate] = useState("");
 
-    const getproductos = async () => {
-        const { data: prod } = await axios.get(`${urlBaseServer}/prod`);
+    const getfiltro = async () => {
+        let url = `${urlBaseServer}/prod`; 
+        if (filtro && categoria) {
+            url = `${urlBaseServer}/filter?categoria=${categoria}&filtro=${filtro}`;
+            console.log("EL FILTRO y CATEGORIA SON: "+filtro+"  "+categoria);
+        }
+        else if (filtro) {
+            url = `${urlBaseServer}/filter?filtro=${filtro}`;
+            console.log("EL FILTRO ES: "+filtro);
+        }
+        else if (categoria) {
+            url = `${urlBaseServer}/filter?categoria=${categoria}`;
+            console.log("LA CATEGORIA ES: "+categoria);
+        }
+        const { data: prod } = await axios.get(url);
         setProductos([...prod.data]);
     };
-
     useEffect(() => {
-        getproductos();
-    }, []);
-
+        getfiltro();
+    }, [filtro, categoria])
     return (
         <div className="bg-white">
-          <div className="flex flex-row-reverse ">
-                <CategoriaF/>
-                <Filtro/>
-          </div>
-            <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                <h2 className="sr-only">Products</h2>
+            <div className="flex mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                <div className="flex-col ">
+                    <CategoriaF setcatevalue={setCate}/>
+                    <Filtro setfiltrovalue={setFiltro}/>
+                </div>
                 <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                <CategoriaF/>
-                <Filtro/>
                     {productos.map((product) => (
                         <a key={product.id} className="group">
                             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">

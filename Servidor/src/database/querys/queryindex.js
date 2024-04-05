@@ -6,9 +6,12 @@ INNER JOIN public.categoria c ON p.catgoria_id = c.categoria_id;
 `
 const selectprodf = `SELECT * FROM productos ORDER BY %s %s`
 const selectprodfiltro = `SELECT * FROM productos WHERE catgoria_id = %s ORDER BY %s %s`
+const categoria = `SELECT categoria_id AS id, categoria_name AS name FROM categoria;
+`;
 module.exports = {
 	selectprod,
 	selectprodfiltro,
 	prodid,
 	selectprodf,
+	categoria,
 };
