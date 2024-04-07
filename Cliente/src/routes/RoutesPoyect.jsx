@@ -12,7 +12,7 @@ const RoutesPoyect = () => {
 			<Route path="/" element={<IndexPage />}></Route>
 			<Route path="/products" element={<ProductPage />}></Route>
 			<Route path="/login" element={<LoginPage />}></Route>
-			<Route path="/registrar" element={<Register />}></Route>
+			<Route path="/registrarse" element={<Register />}></Route>
 			<Route path="/carro" element={<CarPage/>}></Route>
 			<Route path="/*" element={<NotFoundPage/>}></Route>
 		</Routes>

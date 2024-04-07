@@ -46,11 +46,11 @@ export const NavBar = () => {
 				<ul className="flex gap-5 mr-10 text-[14px] text-white">
 					<Link spy={true} smooth={true} to="/">
 						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
-						<NavLink to={"/login"}>Ingresar</NavLink></li>
+						<NavLink to={"/login"}>Iniciar sesion</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/">
 						<li className="p-4 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
-						<NavLink to={"/registrar"}>Registrarce</NavLink></li>
+						<NavLink to={"/registrarse"}>Registrarse</NavLink></li>
 					</Link>
 					<Link spy={true} smooth={true} to="/"><li className="p-5 bg-[#4fb4b9] rounded-full hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
 					<NavLink to={"/carro"}><FaCartShopping></FaCartShopping></NavLink>
