@@ -4,16 +4,17 @@ import ProductPage from "../pages/productPage/ProductPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
 import Register from "../pages/Register/Register";
-import CarPage from "../pages/carroPage.jsx/CarPage";
+import CarroPage from "../pages/carroPage/CarroPage";
+
 const RoutesPoyect = () => {
     
 	return (
 		<Routes>
 			<Route path="/" element={<IndexPage />}></Route>
-			<Route path="/products" element={<ProductPage />}></Route>
+			<Route path="/products" element={<ProductPage/>}></Route>
 			<Route path="/login" element={<LoginPage />}></Route>
 			<Route path="/registrarse" element={<Register />}></Route>
-			<Route path="/carro" element={<CarPage/>}></Route>
+			<Route path="/carro" element={<CarroPage />}></Route>
 			<Route path="/*" element={<NotFoundPage/>}></Route>
 		</Routes>
 	);
