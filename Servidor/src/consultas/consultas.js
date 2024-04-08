@@ -1,31 +1,30 @@
 const pool = require('../database/dbindex') 
-const bcrypt = require('bcryptjs')
+// const bcrypt = require('bcryptjs')
 
-const getPosts = async (email) => {
-    const {rows} = await pool.query("select * from usuarios where email = $1", [email])
+
+// const getPosts = async (user_email) => {
+//     const {rows} = await pool.query("select * from usuarios where user_email = $1", [user_email])
+//     return rows
+// }
+
+const sendPosts = async ( user_nombre,user_email,user_telefono,user_perfil,user_password) => {
+    // const passwordEncrypt =  bcrypt.hashSync(user_password)
+    // const clave = passwordEncrypt
+    const {rows} = await pool.query("insert into usuarios( user_nombre,user_email,user_telefono,user_perfil,user_password) values ($1,$2,$3,$4,$5)",
+    [ user_nombre,user_email,user_telefono,user_perfil,user_password])
     return rows
 }
 
-const sendPosts = async (email,password,rol,lenguage) => {
-    const passwordEncrypt =  bcrypt.hashSync(password)
-    const clave = passwordEncrypt
-    const {rows} = await pool.query("insert into usuarios(email,password,rol,lenguage) values ($1,$2,$3,$4)",
-    [email,clave,rol,lenguage])
+const login = async (user_email,user_password) => {
+    const {rows} = await pool.query("select * from usuarios where user_email = $1 and user_password = $2", [user_email, user_password])
     return rows
 }
 
-const verificarCredenciales = async (email, password) => {
-    const values = [email]
-    const consulta = "SELECT * FROM usuarios WHERE email = $1"
-    const { rows: [usuario], rowCount } = await pool.query(consulta, values)
-    const { password: passwordEncriptada } = usuario
-    const passwordEsCorrecta = bcrypt.compareSync(password, passwordEncriptada)
-    if (!passwordEsCorrecta || !rowCount)
-    throw { code: 401, message: "Email o contraseña incorrecta" }
-}
+
 
 module.exports = {
     sendPosts,
-    getPosts,
-    verificarCredenciales
+    login
+    // getPosts,
+    
 }

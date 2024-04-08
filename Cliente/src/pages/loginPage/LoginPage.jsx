@@ -1,75 +1,110 @@
-import axios from 'axios'
-import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ENDPOINT } from '../../config/constants'
-// import Context from '../contexts/Context'
-
-const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-const initialForm = { email: 'correo@correo.com', password: '123456789' }
+import React, { useState } from 'react';
+import axios from 'axios';
+import { ENDPOINT } from '../../config/constants';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const [formData, setFormData] = useState({
+    user_email: '',
+    user_password: '',
+  });
   const navigate = useNavigate()
-  const [user, setUser] = useState(initialForm)
-  // const { setDeveloper } = useContext(Context)
 
-  const handleUser = (event) => setUser({ ...user, [event.target.name]: event.target.value })
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleForm = (event) => {
-    event.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!user.email.trim() || !user.password.trim()) {
-      return window.alert('Email y password obligatorias.')
+    try {
+      const response = await axios.post(ENDPOINT.login, formData);
+      console.log(response.data); 
+      navigate('/')
+    } catch (error) {
+      console.error('Error:', error);
     }
-
-    if (!emailRegex.test(user.email)) {
-      return window.alert('El formato del email no es correcto!')
-    }
-
-    axios.post(ENDPOINT.login, user)
-      .then(({ data }) => {
-        window.sessionStorage.setItem('token', data.token)
-        window.alert('Usuario identificado con éxito 😀.')
-        // setDeveloper({})
-        console.log(data)
-        navigate('/perfil')
-      })
-      .catch(({ response: { data } }) => {
-        console.error(data)
-        window.alert(`${data.message} 🙁.`)
-      })
-      
-  }
+  };
 
   return (
-    <form onSubmit={handleForm} className='mx-auto mt-10 pb-28 w-10/12 sm:w-6/12 md:w-3/12'>
-  <h1 className='text-center text-2xl font-bold'>Iniciar Sesión</h1>
-  <hr className='my-4' />
-  <div className='mb-4'>
-    <label className='block'>Email address</label>
-    <input
-      value={user.email}
-      onChange={handleUser}
-      type='email'
-      name='email'
-      className='w-full p-2 border border-gray-300 rounded'
-      placeholder='Enter email'
-    />
-  </div>
-  <div className='mb-4'>
-    <label className='block'>Password</label>
-    <input
-      value={user.password}
-      onChange={handleUser}
-      type='password'
-      name='password'
-      className='w-full p-2 border border-gray-300 rounded'
-      placeholder='Password'
-    />
-  </div>
-  <button type='submit' className='w-full p-2 bg-indigo-600 text-white  rounded mt-4'>Iniciar Sesión</button>
-</form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Iniciar Sesión</h2>
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <input type="hidden" name="remember" defaultValue="true" />
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="email-address" className="sr-only">
+                Correo Electrónico
+              </label>
+              <input
+                id="email-address"
+                name="user_email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Correo Electrónico"
+                value={formData.user_email}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Contraseña
+              </label>
+              <input
+                id="password"
+                name="user_password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Contraseña"
+                value={formData.user_password}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
 
-  )
-}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember_me"
+                name="remember_me"
+                type="checkbox"
+                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              />
+              <label htmlFor="remember_me" className="ml-2 block text-sm text-gray-900">
+                Recordar sesión
+              </label>
+            </div>
 
-export default LoginPage
+            <div className="text-sm">
+              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                ¿Olvidaste tu contraseña?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                {/* <!-- Heroicon name: solid/lock-closed --> */}
+                
+              </span>
+              Iniciar sesión
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
