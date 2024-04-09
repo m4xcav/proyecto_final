@@ -3,13 +3,15 @@ const { Pool } = require('pg');
 
 // Configura la conexión a la base de datos
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
+  user: 'sublikkar_user',
+  host: 'dpg-co9ljvq0si5c739emhl0-a.oregon-postgres.render.com',
   database: 'sublikkar',
-  password: '1234',
+  password: 'u30h5ZEeoJ1Hv2vtcJtVGkckP2Cwmh73',
   port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
-
 // Lee el contenido binario de la imagen desde el archivo
 const agenda1 = '../../img/agenda1.png';
 const agenda2 = '../../img/agenda2.png';
