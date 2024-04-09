@@ -4,7 +4,7 @@ import CategoriaF from "../../components/filtro/CategoriaF";
 import Filtro from "../../components/filtro/Filtro";
 
 const ProductPage = () => {
-    const urlBaseServer = "http://localhost:3000";
+    const urlBaseServer = "https://proyecto-final-3ud3.onrender.com";
     const [productos, setProductos] = useState([]);
     const [filtro, setFiltro] = useState("");
     const [categoria, setCate] = useState("");
