@@ -4,7 +4,7 @@ import { createContext, useState,useEffect } from "react"
 export const ApiContext = createContext()
 
 const ApiProvider = ({children}) => {
-    const urlBaseServer = "http://localhost:3000";
+    const urlBaseServer = "https://proyecto-final-sublikkar.onrender.com";
     const [productos, setProductos] = useState([]);
     const [cart,setcart] = useState([]);
     const [filtro, setFiltro] = useState("");

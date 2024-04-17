@@ -3,7 +3,7 @@ import { BiChevronDown } from "react-icons/bi";
 import axios from "axios";
 
 const CategoriaF = ({setCate}) => {
-  const urlBaseServer = "http://localhost:3000";
+  const urlBaseServer = "https://proyecto-final-sublikkar.onrender.com";
 const [Categoria, setCategoria] = useState([]);
 
 const getcategoria = async () => {
