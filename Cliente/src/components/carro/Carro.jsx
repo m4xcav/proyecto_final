@@ -34,7 +34,12 @@ const Carro = () => {
                         {cart.map((item) => (
                             <>
                              <div key={item.id} className="bg-white p-4 rounded shadow">
-                                <img src={item.img.data} alt={item.nombre} className="h-32 w-full object-cover mb-4" />
+                                <img src={`data:image/png;base64,${btoa(
+                                            new Uint8Array(item.img.data).reduce(
+                                                (data, byte) => data + String.fromCharCode(byte),
+                                                ''
+                                            )
+                                        )}`} alt={item.nombre} className="h-32 w-full object-cover mb-4" />
                                 <h2 className="text-lg font-bold">{item.nombre}</h2>
                                 <p className="text-gray-600">{item.descripcion}</p>
                                 <p className="text-gray-800 mt-2">${item.precio}</p>
